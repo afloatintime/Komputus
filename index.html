@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Funções</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Funções</h1>
+        <select id="functionSelect" onchange="showInputs()">
+            <option value="">Selecione uma função</option>
+            <option value="quadratica">Quadrática</option>
+            <option value="modular">Modular</option>
+            <option value="exponencial">Exponencial</option>
+            <option value="logaritmica">Logarítmica</option>
+        </select>
+
+        <div id="inputs" class="inputs"></div>
+        <button onclick="calculate()">Calcular</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
