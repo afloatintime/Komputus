@@ -2,26 +2,36 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Komputus - Calculadora de funções matemáticas: função quadrática, módulo, potenciação, logaritmo e progressão aritmética">
+    <meta name="theme-color" content="#0078d7">
     <title>Komputuss</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Komputus, a calculadora de Raíz de Função Quadrática, Módulo, Potenciação e Logarítmo</h1>
-        <select id="functionSelect" onchange="showInputs()">
-            <option value="">Selecione um calculo a fazer:</option>
+        <h1>Komputus - Calculadora Matemática</h1>
+        <select id="functionSelect" onchange="showInputs()" aria-label="Selecione a função matemática">
+            <option value="">Selecione um cálculo a fazer:</option>
             <option value="quadratica">Raízes da Função Quadrática</option>
             <option value="modular">Módulo</option>
             <option value="exponencial">Potenciação</option>
             <option value="logaritmica">Logarítmo</option>
+            <option value="pa">Progressão Aritmética</option>
+            <option value="pa-soma">Soma dos Termos da P.A.</option>
         </select>
-
-        <div id="inputs" class="inputs"></div>
-        <button onclick="calculate()">Calcular</button>
-        <div id="result" class="result"></div>
+        
+        <!-- Segundo select para P.A. que aparecerá quando necessário -->
+        <div id="subOptionDiv" style="display: none;">
+            <select id="subOptionSelect" onchange="updateInputFields()" aria-label="Selecione a operação específica">
+                <option value="">Selecione o que deseja calcular</option>
+            </select>
+        </div>
+        
+        <div id="inputs" class="inputs" role="form"></div>
+        <button id="calculateBtn" type="button">Calcular</button>
+        <div id="result" class="result" role="region" aria-live="polite"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
