@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -6,286 +7,339 @@
     <title>Komputus</title>
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #8BC34A;
-            --accent-color: #c19a6b;
-            --background-color: #f5f5f0;
-            --paper-color: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.12);
-            --text-color: #333333;
-            --button-hover: #e8f5e9;
-            --button-active: #c8e6c9;
-            --border-color: #dcdcdc;
-            --header-color: #3e8e41;
-            --nav-active: #e6f4e8;
+            --primary-gradient: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 50%, #03a9f4 100%);
+            --secondary-gradient: linear-gradient(135deg, #81c784 0%, #66bb6a 50%, #4caf50 100%);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-light: #ffffff;
+            --text-dark: #2c3e50;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(79, 195, 247, 0.3);
+            --backdrop: blur(10px);
         }
-        
+
         [data-theme="dark"] {
-            --primary-color: #26A69A;
-            --secondary-color: #4DB6AC;
-            --accent-color: #29b6f6;
-            --background-color: #121212;
-            --paper-color: #1e1e1e;
-            --shadow-color: rgba(0, 0, 0, 0.24);
-            --text-color: #f5f5f5;
-            --button-hover: #1a2c2b;
-            --button-active: #19403d;
-            --border-color: #2d2d2d;
-            --header-color: #1a857b;
-            --nav-active: #1a373a;
+            --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            --secondary-gradient: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0f766e 100%);
+            --glass-bg: rgba(0, 0, 0, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-light: #e1f5fe;
+            --text-dark: #2c3e50;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.3s ease;
         }
-        
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-        
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(41, 182, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         header {
-            background-color: var(--header-color);
-            color: white;
-            padding: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 2px 4px var(--shadow-color);
+            box-shadow: var(--shadow);
             position: relative;
             z-index: 10;
         }
-        
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--text-light);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
         .theme-toggle {
             position: absolute;
-            right: 1rem;
-            top: 1rem;
-            background: none;
-            border: none;
-            color: white;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
         }
-        
+
         .theme-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+            box-shadow: var(--glow);
         }
-        
+
         main {
             flex: 1;
-            padding: 1rem;
-            max-width: 800px;
+            padding: 2rem;
+            max-width: 900px;
             margin: 0 auto;
             width: 100%;
         }
-        
+
         .calculator-container {
-            background-color: var(--paper-color);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px var(--shadow-color);
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
             overflow: hidden;
             margin-bottom: 2rem;
         }
-        
+
         .nav-tabs {
             display: flex;
-            background-color: var(--primary-color);
-            color: white;
+            background: var(--secondary-gradient);
             overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
         .nav-tab {
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             cursor: pointer;
-            white-space: nowrap;
-        }
-        
-        .nav-tab.active {
-            background-color: var(--nav-active);
-            color: var(--primary-color);
+            color: var(--text-light);
             font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        
+
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab.active {
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            border-bottom-color: #4fc3f7;
+            color: var(--text-dark);
+            text-shadow: none;
+        }
+
         .tab-content {
             display: none;
-            padding: 1.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: var(--backdrop);
         }
-        
+
         .tab-content.active {
             display: block;
         }
-        
+
         .year-separator {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #0277bd;
+            font-weight: 600;
+            text-align: center;
+            padding: 0.5rem;
+            background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.2), transparent);
+            border-radius: 8px;
         }
-        
+
         .input-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
-        
+
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background-color: var(--paper-color);
-            color: var(--text-color);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            box-shadow: 0 2px 4px var(--shadow-color);
-        }
-        
-        button:hover {
-            background-color: var(--header-color);
-        }
-        
-        .results {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: var(--paper-color);
-            border-radius: 4px;
-            border-left: 4px solid var(--secondary-color);
-        }
-        
-        .result-item {
-            margin-bottom: 0.5rem;
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-        }
-        
-        input:hover, select:hover {
-            border-color: var(--secondary-color);
-        }
-        
-        button {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        button:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(100, 100);
-                opacity: 0;
-            }
-        }
-        
-        button:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: var(--paper-color);
-            color: var(--text-color);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
+            font-weight: 600;
+            color: var(--text-dark);
         }
 
-        @media (max-width: 600px) {
-            .calculator-keypad {
-                grid-template-columns: repeat(4, 1fr);
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4fc3f7;
+            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+            transform: translateY(-1px);
+        }
+
+        button {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.9));
+            border-radius: 10px;
+            border-left: 4px solid #4fc3f7;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .results p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .results strong {
+            color: #0277bd;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            color: var(--text-light);
+            border-top: 1px solid var(--glass-border);
+            margin-top: auto;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
             }
-            
-            .calc-key {
-                padding: 0.5rem 0;
-                font-size: 1rem;
+
+            main {
+                padding: 1rem;
             }
-            
+
+            h1 {
+                font-size: 2rem;
+            }
+
             .nav-tab {
-                padding: 0.75rem;
+                padding: 0.8rem 1rem;
                 font-size: 0.9rem;
             }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
         }
-        
-        .grecian-element {
+
+        /* Animações suaves */
+        .calculator-container {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efeitos de brilho */
+        .nav-tab.active::after {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 20px;
-            background-image: repeating-linear-gradient(90deg, 
-                var(--accent-color) 0px, 
-                var(--accent-color) 10px, 
-                transparent 10px, 
-                transparent 20px);
-            opacity: 0.7;
+            bottom: -1px;
+            left: 50%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4fc3f7, transparent);
+            transform: translateX(-50%);
         }
-        
-        .top-element {
-            top: 0;
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        
-        .bottom-element {
-            bottom: 0;
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #29b6f6, #4fc3f7);
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/roboto/0.0.0/roboto.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="grecian-element top-element"></div>
         <h1>Komputus</h1>
-        <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-        </button>
-        <div class="grecian-element bottom-element"></div>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
     </header>
-    
+
     <main>
         <div class="calculator-container">
             <div class="nav-tabs">
@@ -295,99 +349,99 @@
                 <div class="nav-tab" data-tab="pa">Progressão Aritmética</div>
                 <div class="nav-tab" data-tab="pg">Progressão Geométrica</div>
             </div>
-            
+
             <div class="tab-content active" id="quadratica">
                 <div class="year-separator">1º Ano do Ensino Médio</div>
                 <p>Calcule as raízes da equação quadrática: ax² + bx + c = 0</p>
-                
+
                 <div class="input-group">
                     <label for="quadA">Valor de a:</label>
                     <input type="number" id="quadA" placeholder="Digite o valor de a">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="quadB">Valor de b:</label>
                     <input type="number" id="quadB" placeholder="Digite o valor de b">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="quadC">Valor de c:</label>
                     <input type="number" id="quadC" placeholder="Digite o valor de c">
                 </div>
-                
+
                 <button id="calcQuad">Calcular</button>
-                
+
                 <div class="results" id="quadResults">
                     <p>Preencha os valores e clique em calcular.</p>
                 </div>
             </div>
-            
+
             <div class="tab-content" id="potenciacao">
                 <div class="year-separator">1º Ano do Ensino Médio</div>
                 <p>Calcule a potenciação com módulo: (a^b) mod m</p>
-                
+
                 <div class="input-group">
                     <label for="potBase">Base (a):</label>
                     <input type="number" id="potBase" placeholder="Digite a base">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="potExp">Expoente (b):</label>
                     <input type="number" id="potExp" placeholder="Digite o expoente">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="potMod">Módulo (m):</label>
                     <input type="number" id="potMod" placeholder="Digite o módulo">
                 </div>
-                
+
                 <button id="calcPot">Calcular</button>
-                
+
                 <div class="results" id="potResults">
                     <p>Preencha os valores e clique em calcular.</p>
                 </div>
             </div>
-            
+
             <div class="tab-content" id="logaritmo">
                 <div class="year-separator">1º Ano do Ensino Médio</div>
                 <p>Calcule logaritmos: log<sub>a</sub>(b)</p>
-                
+
                 <div class="input-group">
                     <label for="logBase">Base (a):</label>
                     <input type="number" id="logBase" placeholder="Digite a base" min="0" step="any">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="logNum">Logaritmando (b):</label>
                     <input type="number" id="logNum" placeholder="Digite o logaritmando" min="0" step="any">
                 </div>
-                
+
                 <button id="calcLog">Calcular</button>
-                
+
                 <div class="results" id="logResults">
                     <p>Preencha os valores e clique em calcular.</p>
                 </div>
             </div>
-            
+
             <div class="tab-content" id="pa">
                 <div class="year-separator">2º Ano do Ensino Médio</div>
                 <p>Calcule termos e soma da Progressão Aritmética (PA)</p>
-                
+
                 <div class="input-group">
                     <label for="paA1">Primeiro termo (a₁):</label>
                     <input type="number" id="paA1" placeholder="Digite o primeiro termo">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="paRazao">Razão (r):</label>
                     <input type="number" id="paRazao" placeholder="Digite a razão">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="paN">Número de termos:</label>
                     <input type="number" id="paN" placeholder="Digite o número de termos" min="1">
                 </div>
-                
+
                 <div class="input-group">
                     <label>O que deseja calcular?</label>
                     <select id="paCalcType">
@@ -396,38 +450,38 @@
                         <option value="ambos">Ambos</option>
                     </select>
                 </div>
-                
+
                 <div class="input-group" id="paTermoEspecifico">
                     <label for="paTermNum">Número do termo específico:</label>
                     <input type="number" id="paTermNum" placeholder="Digite o número do termo" min="1">
                 </div>
-                
+
                 <button id="calcPA">Calcular</button>
-                
+
                 <div class="results" id="paResults">
                     <p>Preencha os valores e clique em calcular.</p>
                 </div>
             </div>
-            
+
             <div class="tab-content" id="pg">
                 <div class="year-separator">2º Ano do Ensino Médio</div>
                 <p>Calcule termos e soma da Progressão Geométrica (PG)</p>
-                
+
                 <div class="input-group">
                     <label for="pgA1">Primeiro termo (a₁):</label>
                     <input type="number" id="pgA1" placeholder="Digite o primeiro termo">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="pgRazao">Razão (q):</label>
                     <input type="number" id="pgRazao" placeholder="Digite a razão">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="pgN">Número de termos:</label>
                     <input type="number" id="pgN" placeholder="Digite o número de termos" min="1">
                 </div>
-                
+
                 <div class="input-group">
                     <label>O que deseja calcular?</label>
                     <select id="pgCalcType">
@@ -437,37 +491,33 @@
                         <option value="ambos">Termo e soma</option>
                     </select>
                 </div>
-                
+
                 <div class="input-group" id="pgTermoEspecifico">
                     <label for="pgTermNum">Número do termo específico:</label>
                     <input type="number" id="pgTermNum" placeholder="Digite o número do termo" min="1">
                 </div>
-                
+
                 <button id="calcPG">Calcular</button>
-                
+
                 <div class="results" id="pgResults">
                     <p>Preencha os valores e clique em calcular.</p>
                 </div>
             </div>
         </div>
-        
-
     </main>
-    
+
     <footer>
-        <div class="grecian-element top-element"></div>
         <p>© 2025 Floating Skies | Feito com amor no Brasil</p>
-        <div class="grecian-element bottom-element"></div>
     </footer>
 
     <script>
         function roundToPlaces(value, places) {
             return Number(Math.round(parseFloat(value + 'e' + places)) + 'e-' + places);
         }
-        
+
         const themeToggle = document.getElementById('themeToggle');
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
         let currentTheme = localStorage.getItem('theme');
         if (!currentTheme) {
             currentTheme = prefersDarkScheme.matches ? 'dark' : 'light';
@@ -479,7 +529,7 @@
             document.body.removeAttribute('data-theme');
             themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         }
-        
+
         themeToggle.addEventListener('click', function() {
             if (document.body.getAttribute('data-theme') === 'dark') {
                 document.body.removeAttribute('data-theme');
@@ -491,38 +541,38 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
-        
+
         const navTabs = document.querySelectorAll('.nav-tab');
         const tabContents = document.querySelectorAll('.tab-content');
-        
+
         navTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 const tabId = tab.getAttribute('data-tab');
-                
+
                 navTabs.forEach(t => t.classList.remove('active'));
                 tabContents.forEach(c => c.classList.remove('active'));
-                
+
                 tab.classList.add('active');
                 document.getElementById(tabId).classList.add('active');
             });
         });
-        
+
         document.getElementById('calcQuad').addEventListener('click', () => {
             const a = parseFloat(document.getElementById('quadA').value);
             const b = parseFloat(document.getElementById('quadB').value);
             const c = parseFloat(document.getElementById('quadC').value);
-            
+
             const resultsDiv = document.getElementById('quadResults');
-            
+
             if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
                 resultsDiv.innerHTML = '<p>Por favor, preencha todos os campos corretamente. O valor de "a" não pode ser zero.</p>';
                 return;
             }
-            
+
             const delta = b * b - 4 * a * c;
             let results = `<p><strong>Equação:</strong> ${a}x² ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)}x ${c >= 0 ? '+ ' + c : '- ' + Math.abs(c)} = 0</p>`;
             results += `<p><strong>Δ (Delta):</strong> ${delta}</p>`;
-            
+
             if (delta < 0) {
                 results += '<p><strong>Resultado:</strong> A equação não possui raízes reais.</p>';
             } else if (delta === 0) {
@@ -536,30 +586,30 @@
                 results += `<p><strong>x₁ =</strong> ${roundToPlaces(x1, 4)}</p>`;
                 results += `<p><strong>x₂ =</strong> ${roundToPlaces(x2, 4)}</p>`;
             }
-            
+
             results += `<p><strong>Vértice:</strong> (${roundToPlaces(-b / (2 * a), 4)}, ${roundToPlaces(-delta / (4 * a), 4)})</p>`;
-            
+
             resultsDiv.innerHTML = results;
         });
-        
+
         document.getElementById('calcPot').addEventListener('click', () => {
             const base = parseInt(document.getElementById('potBase').value);
             const expoente = parseInt(document.getElementById('potExp').value);
             const modulo = parseInt(document.getElementById('potMod').value);
-            
+
             const resultsDiv = document.getElementById('potResults');
-            
+
             if (isNaN(base) || isNaN(expoente) || isNaN(modulo) || modulo <= 0) {
                 resultsDiv.innerHTML = '<p>Por favor, preencha todos os campos corretamente. O módulo deve ser maior que zero.</p>';
                 return;
             }
-            
+
             function modPow(base, exponent, modulus) {
                 if (modulus === 1) return 0;
-                
+
                 let result = 1;
                 base = base % modulus;
-                
+
                 while (exponent > 0) {
                     if (exponent % 2 === 1) {
                         result = (result * base) % modulus;
@@ -567,34 +617,34 @@
                     exponent = Math.floor(exponent / 2);
                     base = (base * base) % modulus;
                 }
-                
+
                 return result;
             }
-            
+
             const result = modPow(base, expoente, modulo);
-            
+
             let html = `<p><strong>Cálculo:</strong> (${base}<sup>${expoente}</sup>) mod ${modulo}</p>`;
             html += `<p><strong>Resultado:</strong> ${result}</p>`;
-            
+
             resultsDiv.innerHTML = html;
         });
-        
+
         document.getElementById('calcLog').addEventListener('click', () => {
             const base = parseFloat(document.getElementById('logBase').value);
             const num = parseFloat(document.getElementById('logNum').value);
-            
+
             const resultsDiv = document.getElementById('logResults');
-            
+
             if (isNaN(base) || isNaN(num) || base <= 0 || base === 1 || num <= 0) {
                 resultsDiv.innerHTML = '<p>Por favor, preencha todos os campos corretamente. A base deve ser positiva e diferente de 1, e o logaritmando deve ser positivo.</p>';
                 return;
             }
-            
+
             const result = Math.log(num) / Math.log(base);
-            
+
             let html = `<p><strong>Cálculo:</strong> log<sub>${base}</sub>(${num})</p>`;
             html += `<p><strong>Resultado:</strong> ${roundToPlaces(result, 6)}</p>`;
-            
+
             html += '<p><strong>Propriedades dos logaritmos:</strong></p>';
             html += '<ul>';
             if (num > 1 && base > 1) {
@@ -604,35 +654,35 @@
                 html += `<li>log<sub>${base}</sub>(${num}<sup>2</sup>) = 2 × log<sub>${base}</sub>(${num}) = ${roundToPlaces(result * 2, 6)}</li>`;
             }
             html += '</ul>';
-            
+
             resultsDiv.innerHTML = html;
         });
-        
+
         document.getElementById('calcPA').addEventListener('click', () => {
             const a1 = parseFloat(document.getElementById('paA1').value);
             const razao = parseFloat(document.getElementById('paRazao').value);
             const n = parseInt(document.getElementById('paN').value);
             const calcType = document.getElementById('paCalcType').value;
-            
+
             const resultsDiv = document.getElementById('paResults');
-            
+
             if (isNaN(a1) || isNaN(razao) || isNaN(n) || n <= 0) {
                 resultsDiv.innerHTML = '<p>Por favor, preencha todos os campos corretamente.</p>';
                 return;
             }
-            
+
             let html = `<p><strong>Progressão Aritmética:</strong> a₁ = ${a1}, razão (r) = ${razao}, n = ${n}</p>`;
-            
+
             const calcTermoEspecifico = (num) => a1 + (num - 1) * razao;
-            
+
             const calcSoma = () => {
                 const an = calcTermoEspecifico(n);
                 return (n / 2) * (a1 + an);
             };
-            
+
             if (calcType === 'termo' || calcType === 'ambos') {
                 const termNum = parseInt(document.getElementById('paTermNum').value);
-                
+
                 if (isNaN(termNum) || termNum <= 0) {
                     html += '<p>Por favor, digite um número válido para o termo específico.</p>';
                 } else {
@@ -641,47 +691,47 @@
                     html += `<p><strong>Fórmula utilizada:</strong> a<sub>n</sub> = a<sub>1</sub> + (n - 1) × r</p>`;
                 }
             }
-            
+
             if (calcType === 'soma' || calcType === 'ambos') {
                 const soma = calcSoma();
                 html += `<p><strong>Soma dos ${n} primeiros termos:</strong> ${roundToPlaces(soma, 4)}</p>`;
                 html += `<p><strong>Fórmula utilizada:</strong> S<sub>n</sub> = (n/2) × (a<sub>1</sub> + a<sub>n</sub>)</p>`;
             }
-            
+
             const maxTermsToShow = Math.min(n, 10);
             html += `<p><strong>Primeiros ${maxTermsToShow} termos:</strong> `;
-            
+
             let termos = [];
             for (let i = 1; i <= maxTermsToShow; i++) {
                 termos.push(roundToPlaces(calcTermoEspecifico(i), 2));
             }
-            
+
             html += termos.join(', ');
             if (n > 10) {
                 html += ', ...';
             }
             html += '</p>';
-            
+
             resultsDiv.innerHTML = html;
         });
-        
+
         document.getElementById('calcPG').addEventListener('click', () => {
             const a1 = parseFloat(document.getElementById('pgA1').value);
             const razao = parseFloat(document.getElementById('pgRazao').value);
             const n = parseInt(document.getElementById('pgN').value);
             const calcType = document.getElementById('pgCalcType').value;
-            
+
             const resultsDiv = document.getElementById('pgResults');
-            
+
             if (isNaN(a1) || isNaN(razao) || isNaN(n) || n <= 0 || razao === 0) {
                 resultsDiv.innerHTML = '<p>Por favor, preencha todos os campos corretamente. A razão não pode ser zero.</p>';
                 return;
             }
-            
+
             let html = `<p><strong>Progressão Geométrica:</strong> a₁ = ${a1}, razão (q) = ${razao}, n = ${n}</p>`;
-            
+
             const calcTermoEspecifico = (num) => a1 * Math.pow(razao, num - 1);
-            
+
             const calcSoma = () => {
                 if (razao === 1) {
                     return a1 * n;
@@ -689,7 +739,7 @@
                     return a1 * (1 - Math.pow(razao, n)) / (1 - razao);
                 }
             };
-            
+
             const calcSomaInfinita = () => {
                 if (Math.abs(razao) >= 1) {
                     return 'A soma infinita só existe quando |q| < 1';
@@ -697,10 +747,10 @@
                     return a1 / (1 - razao);
                 }
             };
-            
+
             if (calcType === 'termo' || calcType === 'ambos') {
                 const termNum = parseInt(document.getElementById('pgTermNum').value);
-                
+
                 if (isNaN(termNum) || termNum <= 0) {
                     html += '<p>Por favor, digite um número válido para o termo específico.</p>';
                 } else {
@@ -709,7 +759,7 @@
                     html += `<p><strong>Fórmula utilizada:</strong> a<sub>n</sub> = a<sub>1</sub> × q<sup>(n-1)</sup></p>`;
                 }
             }
-            
+
             if (calcType === 'soma' || calcType === 'ambos') {
                 const soma = calcSoma();
                 html += `<p><strong>Soma dos ${n} primeiros termos:</strong> ${roundToPlaces(soma, 4)}</p>`;
@@ -719,7 +769,7 @@
                     html += `<p><strong>Fórmula utilizada:</strong> S<sub>n</sub> = a<sub>1</sub> × (1 - q<sup>n</sup>) / (1 - q)</p>`;
                 }
             }
-            
+
             if (calcType === 'infinita') {
                 const somaInfinita = calcSomaInfinita();
                 html += `<p><strong>Soma infinita:</strong> `;
@@ -731,24 +781,24 @@
                 html += `</p>`;
                 html += `<p><strong>Fórmula utilizada:</strong> S<sub>∞</sub> = a<sub>1</sub> / (1 - q)</p>`;
             }
-            
+
             const maxTermsToShow = Math.min(n, 10);
             html += `<p><strong>Primeiros ${maxTermsToShow} termos:</strong> `;
-            
+
             let termos = [];
             for (let i = 1; i <= maxTermsToShow; i++) {
                 termos.push(roundToPlaces(calcTermoEspecifico(i), 2));
             }
-            
+
             html += termos.join(', ');
             if (n > 10) {
                 html += ', ...';
             }
             html += '</p>';
-            
+
             resultsDiv.innerHTML = html;
         });
-        
+
         document.getElementById('paCalcType').addEventListener('change', function() {
             const termField = document.getElementById('paTermoEspecifico');
             if (this.value === 'termo' || this.value === 'ambos') {
@@ -757,7 +807,7 @@
                 termField.style.display = 'none';
             }
         });
-        
+
         document.getElementById('pgCalcType').addEventListener('change', function() {
             const termField = document.getElementById('pgTermoEspecifico');
             if (this.value === 'termo' || this.value === 'ambos') {
@@ -766,7 +816,7 @@
                 termField.style.display = 'none';
             }
         });
-        
+
         document.getElementById('paTermoEspecifico').style.display = 'block';
         document.getElementById('pgTermoEspecifico').style.display = 'block';
         document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -780,15 +830,15 @@
                 }, 100);
             });
         });
-        
+
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    
+
                     const currentTab = input.closest('.tab-content');
                     const calcButton = currentTab.querySelector('button');
-                    
+
                     if (calcButton) {
                         calcButton.click();
                     }
